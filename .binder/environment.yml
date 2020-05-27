@@ -1,0 +1,6 @@
+name: covid_plots
+channels:
+  - conda-forge
+dependencies:
+  - pandas=1.0.*
+  - bokeh=2.0.*
