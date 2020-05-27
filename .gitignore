@@ -1,3 +1,8 @@
+# Local
+.vscode
+datos/brutos/*COVID19MEXICO.csv
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
