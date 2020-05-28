@@ -1,1 +1,3 @@
-#Este directorio es para almacenar los archivos generados por el repo, no se agregan al repo por cuestiones de espacio en github
+# Historias por paciente (:flag-mx:)
+
+Actualizado a diario
