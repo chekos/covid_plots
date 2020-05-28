@@ -1,7 +1,7 @@
 # Local
 .vscode
 datos/brutos/*COVID19MEXICO.csv
-
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
