@@ -27,12 +27,11 @@ ARCHIVOS_DESCARGADOS = [path.name for path in DATOS_BRUTOS.glob("*COVID19MEXICO.
 
 def checa_url(url: str) -> None:
     try:
-        r = requests.get(URL_DATOS)
+        r = requests.get(url)
         return r
     except requests.exceptions.RequestException as e:  # This is the correct syntax
         SystemExit(e)
         return None
-    
 
 def descarga_datos(fecha: str, url: str = URL_HISTORICOS, mas_recientes: bool = False) -> None:
     """Descarga datos historicos desde la URL base
@@ -48,22 +47,20 @@ def descarga_datos(fecha: str, url: str = URL_HISTORICOS, mas_recientes: bool = 
         URL_DATOS = url
     else:
         URL_DATOS = f"{url}{fecha}.zip"
+
+    dia, mes, año = fecha.split(".")
+    nombre_del_archivo = f"{año[-2:]}{mes}{dia}COVID19MEXICO.csv"
     # Extraer los datos si no los hemos descargado
     try:
-        if mas_recientes:
-            nombre_del_archivo = dt.today().strftime("%y%m%d") + "COVID19MEXICO.csv"
-        else:
-            dia, mes, año = fecha.split(".")
-            nombre_del_archivo = f"{año[-2:]}{mes}{dia}COVID19MEXICO.csv"
         if nombre_del_archivo not in ARCHIVOS_DESCARGADOS:
             r = checa_url(URL_DATOS)
-            print(f"Descargando archivo `{nombre_del_archivo}`.", end = "\r")
+            print(f"Descargando archivo `{nombre_del_archivo}`.", end = "\n")
             archivo = ZipFile(io.BytesIO(r.content))
             archivo.extractall(DATOS_BRUTOS)
         else:
-            print(f"El archivo {nombre_del_archivo} ya existe.", end = "\r",)
+            print(f"El archivo {nombre_del_archivo} ya existe.", end = "\n",)
     except:
-        print(f"El archivo de {fecha} no se pudo descargar.", end = "\r")
+        print(f"El archivo de {fecha} no se pudo descargar.", end = "\n")
 
 
 if __name__ == "__main__":
@@ -72,4 +69,4 @@ if __name__ == "__main__":
         descarga_datos(fecha)
 
     # los mas recientes
-    descarga_datos(fecha = "", url=URL_DEL_DIA, mas_recientes=True)
+    descarga_datos(fecha = FECHAS_SUFIJO[-1], url=URL_DEL_DIA, mas_recientes=True)
