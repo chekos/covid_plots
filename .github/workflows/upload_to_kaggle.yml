@@ -21,6 +21,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install kaggle
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Obtener datos y crear historias de pacientes
+      run: |
+        python src/datos/obtener_datos.py
+        python src/datos/crear_historias_pacientes.py
     - name: Prepara credenciales de Kaggle
       env:
         KAGGLE_API_KEY: ${{ secrets.KAGGLE_API_KEY }}
