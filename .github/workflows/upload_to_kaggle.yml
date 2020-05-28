@@ -23,8 +23,8 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Prepara credenciales de Kaggle
       run: |
-        sh .github/kaggle_credentials.sh
-        sh .github/kaggle_prep_data.sh
+        sh .github/utils/kaggle_credentials.sh
+        sh .github/utils/kaggle_prep_data.sh
     - name: Sube datos a Kaggle
       env:
         HOY: date +"%Y-%m-%d"
