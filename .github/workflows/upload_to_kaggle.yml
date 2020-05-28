@@ -26,7 +26,6 @@ jobs:
         KAGGLE_API_KEY: ${{ secrets.KAGGLE_API_KEY }}
       run: |
         sh .github/utils/kaggle_credentials.sh
-        sh .github/utils/kaggle_prep_data.sh
     - name: Sube datos a Kaggle
       env:
         HOY: date +"%Y-%m-%d"
