@@ -19,8 +19,7 @@ jobs:
     - name: Instala dependencias
       run: |
         python -m pip install --upgrade pip
-        pip install kaggle
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -f .github/utils/requirements.txt
     - name: Obtener datos y crear historias de pacientes
       run: |
         python src/datos/obtener_datos.py
