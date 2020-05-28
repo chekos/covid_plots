@@ -34,7 +34,7 @@ def checa_url(url: str) -> None:
         return None
     
 
-def descarga_datos(fecha: str, url: str = URL_HISTORICOS) -> None:
+def descarga_datos(fecha: str, url: str = URL_HISTORICOS, mas_recientes: bool = False) -> None:
     """Descarga datos historicos desde la URL base
 
     Parameters
@@ -44,11 +44,17 @@ def descarga_datos(fecha: str, url: str = URL_HISTORICOS) -> None:
     url : str
         URL base con la cual construimos la URL de la que descargamos los datos.
     """
-    URL_DATOS = f"{url}{fecha}.zip"
+    if mas_recientes:
+        URL_DATOS = url
+    else:
+        URL_DATOS = f"{url}{fecha}.zip"
     # Extraer los datos si no los hemos descargado
     try:
-        dia, mes, año = fecha.split(".")
-        nombre_del_archivo = f"{año[-2:]}{mes}{dia}COVID19MEXICO.csv"
+        if mas_recientes:
+            nombre_del_archivo = dt.today().strftime("%y%m%d") + "COVID19MEXICO.csv"
+        else:
+            dia, mes, año = fecha.split(".")
+            nombre_del_archivo = f"{año[-2:]}{mes}{dia}COVID19MEXICO.csv"
         if nombre_del_archivo not in ARCHIVOS_DESCARGADOS:
             r = checa_url(URL_DATOS)
             print(f"Descargando archivo `{nombre_del_archivo}`.", end = "\r")
@@ -66,4 +72,4 @@ if __name__ == "__main__":
         descarga_datos(fecha)
 
     # los mas recientes
-    descarga_datos(fecha = "", url=URL_DEL_DIA)
+    descarga_datos(fecha = "", url=URL_DEL_DIA, mas_recientes=True)
