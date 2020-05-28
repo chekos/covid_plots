@@ -1,1 +1,8 @@
+# Obtiene los datos desde la pagina oficial del gobierno federal
 python src/datos/obtener_datos.py
+
+# Borra historias anteriores
+rm datos/procesados/historia_pacientes*.csv
+
+# Crea historia de pacientes de hoy
+python src/datos/crear_historias_pacientes.py
