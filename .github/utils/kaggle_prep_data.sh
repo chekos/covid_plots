@@ -1,7 +1,7 @@
 echo "\
 {\
-  \"title\": \"historias-pacientes-covid-mx\",\
-  \"id\": \"tacosdedatos/historias-pacientes-covid-mx\",\
+  \"title\": \"covid-mx-historias-de-pacientes\",\
+  \"id\": \"tacosdedatos/covid-mx-historias-de-pacientesx\",\
   \"licenses\": [\
     {\
       \"name\": \"CC0-1.0\"\
