@@ -54,13 +54,13 @@ def descarga_datos(fecha: str, url: str = URL_HISTORICOS, mas_recientes: bool = 
     try:
         if nombre_del_archivo not in ARCHIVOS_DESCARGADOS:
             r = checa_url(URL_DATOS)
-            print(f"Descargando archivo `{nombre_del_archivo}`.", end = "\n")
+            print(f"Descargando archivo `{nombre_del_archivo}`.", end = "\r")
             archivo = ZipFile(io.BytesIO(r.content))
             archivo.extractall(DATOS_BRUTOS)
         else:
-            print(f"El archivo {nombre_del_archivo} ya existe.", end = "\n",)
+            print(f"El archivo {nombre_del_archivo} ya existe.", end = "\r",)
     except:
-        print(f"El archivo de {fecha} no se pudo descargar.", end = "\n")
+        print(f"El archivo de {fecha} no se pudo descargar.", end = "\r")
 
 
 if __name__ == "__main__":
