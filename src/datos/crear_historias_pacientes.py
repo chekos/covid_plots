@@ -33,12 +33,12 @@ grupos_id = data.groupby("ID_REGISTRO")
 pacientes = grupos_id[['FECHA_SINTOMAS', 'FECHA_ARCHIVO', 'FECHA_INGRESO', 'FECHA_DEF']].min()
 
 ### Para obtener la fecha del primer evento en la historia de un paciente
-def fechador(frame: pd.core.frame.DataFrame, columna: str, valor: int) -> pd.Timestamp:
+def fechador(frame: pd.DataFrame, columna: str, valor: int) -> pd.Timestamp:
     """Extrae la fecha del primer evento en la historia de un paciente. Cada `frame` es la historia de un paciente. Busca el `valor` obtenido en la `columna` obtenida y devuelve la primera fecha en la que esa 
 
     Parameters
     ----------
-    frame : pd.core.frame.DataFrame
+    frame : pd.DataFrame
         Un objeto groupby de pandas
     columna : str
         Columna para buscar el `valor` sugerido.
