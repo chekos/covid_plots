@@ -1,1 +1,1 @@
-python -m src/datos/obtener_datos.py
+python src/datos/obtener_datos.py
