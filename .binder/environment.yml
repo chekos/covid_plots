@@ -4,3 +4,6 @@ channels:
 dependencies:
   - pandas=1.0.*
   - bokeh=2.0.*
+  - colorcet=2.0.*
+  - scipy=1.4.*
+  - scikit-learn=0.23.*
