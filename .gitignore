@@ -1,6 +1,7 @@
 # Local
 .vscode
 datos/brutos/*COVID19MEXICO.csv
+datos/procesados/historia_pacientes*.csv
 .DS_Store
 
 # Byte-compiled / optimized / DLL files
