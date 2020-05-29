@@ -12,7 +12,7 @@ DATOS_PROCESADOS = DATOS.joinpath('procesados/')
 # 1. Construye dataset de las bases de datos diarias
 print("Leyendo los datos...")
 dataframes = []
-for base_de_datos in DATOS_BRUTOS.glob("*COVID19MEXICO.csv"):
+for base_de_datos in DATOS_BRUTOS.glob("200527COVID19MEXICO.csv"):
     _df = pd.read_csv(base_de_datos, encoding = 'latin1', low_memory=False)
     _df['FECHA_ARCHIVO'] = dt.strptime(base_de_datos.name[:6], '%y%m%d').date()
     dataframes.append(_df)
@@ -28,12 +28,12 @@ for columna in columnas_de_fechas:
     data[columna] = pd.to_datetime(data[columna], format = "%Y-%m-%d", errors = 'coerce', )
 
 ## 2.2 Agregacion a nivel id_registro (por persona)
-grupos_id = data.groupby("ID_REGISTRO")
+grupos_id = data.groupby(["ID_REGISTRO"])
 
 pacientes = grupos_id[['FECHA_SINTOMAS', 'FECHA_ARCHIVO', 'FECHA_INGRESO', 'FECHA_DEF']].min()
 
 ### Para obtener la fecha del primer evento en la historia de un paciente
-def fechador(frame: pd.DataFrame, columna: str, valor: int) -> pd.Timestamp:
+def fechador(frame, columna: str, valor: int):
     """Extrae la fecha del primer evento en la historia de un paciente. Cada `frame` es la historia de un paciente. Busca el `valor` obtenido en la `columna` obtenida y devuelve la primera fecha en la que esa 
 
     Parameters
@@ -52,17 +52,15 @@ def fechador(frame: pd.DataFrame, columna: str, valor: int) -> pd.Timestamp:
     """
     sframe = frame.sort_values("FECHA_ARCHIVO")
     fframe = sframe[sframe[columna] == valor]
-
     if len(fframe) == 0:
         return None
-    
     ind_s = sframe.index[0]
     ind_f = fframe.index[0]
-
     if (ind_s == ind_f):
-        return sframe["FECHA_INGRESO"].min()
+        return pd.Series(sframe["FECHA_INGRESO"].min())
     else:
-        return fframe.loc[ind_f, "FECHA_ARCHIVO"]
+        return pd.Series(fframe.loc[ind_f, "FECHA_ARCHIVO"])
+        
 
 print("Procesando los datos, construyendo historias por paciente...")
 print("Esto puede tardar un rato...")
