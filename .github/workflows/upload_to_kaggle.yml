@@ -2,8 +2,8 @@
 name: Sube a Kaggle
 
 on:
-  push:
-    branches: [ master ]
+  schedule:
+    - cron: '0 10 * * *'
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
         sh .github/utils/kaggle_credentials.sh
     - name: Sube datos a Kaggle
       env:
-        HOY: date +"%Y-%m-%d"
+        HOY: TZ=":America/Mexico_City" date +"%Y-%m-%d"
       run: |
         kaggle datasets version -p ./datos/procesados/ -m "Actualización de ${HOY}"
 
