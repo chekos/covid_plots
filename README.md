@@ -63,3 +63,8 @@ Hasta ahora van 6 scripts:
 
 Creado con `cookiecutter` y la plantilla de [@tacosdedatos](https://github.com/tacos-de-datos/cookiecutter-analisis-de-datos)
 
+# TODO
+1. Cron Job que actualice el ReadME (puede ser con Rmarkdown)
+2. Mover github action a repositorio de datos
+3. action que ejecute todos los notebooks con los datos del dia
+  - tal vez nomas tomar las historias de pacientes del dia de kaggle
